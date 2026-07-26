@@ -515,9 +515,9 @@ const OBRAS = [
 
   /* ======================= SECANTES ======================= */
   {
-    id: "SC-001", categoria: "secante", titulo: "Blancanieves",
+    id: "SC-001", categoria: "secante", titulo: "Los enanitos con la tinta",
     tecnica: "Secante ilustrado (edición Pelikan)", medidas: "9 x 13 cm", anio: "h. 1950-60",
-    imagen: "images/secante-blancanieves.jpg",
+    imagen: "images/secante-enanos-tinta.jpg",
     disponible: true, precio: "Consultar", destacada: true,
     notas: "Ilustración infantil.", historia: ""
   },
