@@ -65,9 +65,13 @@ function obrasVisibles() {
       lista.sort((a, b) => (b.disponible === true) - (a.disponible === true));
       break;
     case "destacadas":
-    default:
       lista.sort((a, b) => (b.destacada === true) - (a.destacada === true));
       break;
+    case "inventario":
+      default:
+      lista.sort((a, b) => a.id.localeCompare(b.id, "es", { numeric: true }));
+      break;
+      
   }
   return lista;
 }
