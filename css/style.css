@@ -230,13 +230,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .categoria-intro {
-  max-width: 68ch;
+  max-width: 60ch;
   color: var(--carbon);
-  font-size: 0.95rem;
+  font-size: clamp(0.88rem, 1.6vw, 0.95rem);
   line-height: 1.6;
-  margin: -6px 0 26px;
-  padding-left: 16px;
+  margin: -6px auto 30px;
+  padding: 4px 0 4px 16px;
   border-left: 2px solid var(--verdigris);
+  text-align: left;
+}
+
+@media (max-width: 640px) {
+  .categoria-intro {
+    max-width: 100%;
+  }
 }
 
 .taller-contador {
