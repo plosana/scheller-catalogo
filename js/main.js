@@ -156,6 +156,15 @@ function abrirFicha(obra) {
     .join("");
 
   document.getElementById("fichaNotas").textContent = obra.notas || "";
+
+  const historiaCont = document.getElementById("fichaHistoria");
+  if (obra.historia) {
+    historiaCont.innerHTML = `<h4>Historia de la pieza</h4><p>${obra.historia}</p>`;
+    historiaCont.hidden = false;
+  } else {
+    historiaCont.hidden = true;
+  }
+
   document.getElementById("fichaPrecio").textContent =
     obra.disponible !== false && obra.precio ? obra.precio : "";
 
@@ -203,6 +212,16 @@ function seleccionarCategoria(categoria) {
   document.querySelectorAll(".chip").forEach((chip) => {
     chip.setAttribute("aria-pressed", String(chip.dataset.cat === categoria));
   });
+
+  const intro = document.getElementById("categoriaIntro");
+  const texto = CATEGORIA_INTRO[categoria];
+  if (texto) {
+    intro.textContent = texto;
+    intro.hidden = false;
+  } else {
+    intro.hidden = true;
+  }
+
   pintarRejilla();
 }
 
