@@ -230,14 +230,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .categoria-intro {
-  max-width: 60ch;
+  max-width: 62ch;
   color: var(--carbon);
-  font-size: clamp(0.88rem, 1.6vw, 0.95rem);
+  font-size: 0.92rem;
   line-height: 1.6;
-  margin: -6px auto 30px;
-  padding: 4px 0 4px 16px;
-  border-left: 2px solid var(--verdigris);
-  text-align: left;
+  margin: 0 0 28px;
+  padding: 18px 22px;
+  background: var(--lienzo-soft);
+  border: 1px solid var(--linea);
+  border-left: 3px solid var(--verdigris);
+  border-radius: var(--radio);
 }
 
 @media (max-width: 640px) {
