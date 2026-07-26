@@ -72,6 +72,14 @@ function obrasVisibles() {
   return lista;
 }
 
+function manejarImagenFaltante(img) {
+  const contenedor = img.parentElement;
+  if (!contenedor) return;
+  contenedor.classList.add("sin-imagen");
+  img.remove();
+  contenedor.insertAdjacentHTML("beforeend", "<span>Foto pendiente<br>de subir</span>");
+}
+
 /* ---------- pintar la rejilla ---------- */
 
 function pintarRejilla() {
@@ -103,7 +111,7 @@ function pintarRejilla() {
         <span class="etiqueta-inventario">Nº ${obra.id}</span>
         ${obra.disponible === false ? '<span class="etiqueta-vendido">Vendido</span>' : ""}
         <img src="${obra.imagen}" alt="${obra.titulo}" loading="lazy"
-             onerror="this.parentElement.classList.add('sin-imagen'); this.remove(); this.parentElement.insertAdjacentHTML('beforeend', '<span>Foto pendiente<br>de subir</span>')">
+             onerror="manejarImagenFaltante(this)">
       </div>
       <div class="obra-info">
         <p class="obra-titulo">${obra.titulo}</p>
@@ -158,11 +166,13 @@ function abrirFicha(obra) {
   document.getElementById("fichaNotas").textContent = obra.notas || "";
 
   const historiaCont = document.getElementById("fichaHistoria");
-  if (obra.historia) {
-    historiaCont.innerHTML = `<h4>Historia de la pieza</h4><p>${obra.historia}</p>`;
-    historiaCont.hidden = false;
-  } else {
-    historiaCont.hidden = true;
+  if (historiaCont) {
+    if (obra.historia) {
+      historiaCont.innerHTML = `<h4>Historia de la pieza</h4><p>${obra.historia}</p>`;
+      historiaCont.hidden = false;
+    } else {
+      historiaCont.hidden = true;
+    }
   }
 
   document.getElementById("fichaPrecio").textContent =
@@ -214,12 +224,14 @@ function seleccionarCategoria(categoria) {
   });
 
   const intro = document.getElementById("categoriaIntro");
-  const texto = CATEGORIA_INTRO[categoria];
-  if (texto) {
-    intro.textContent = texto;
-    intro.hidden = false;
-  } else {
-    intro.hidden = true;
+  if (intro) {
+    const texto = CATEGORIA_INTRO[categoria];
+    if (texto) {
+      intro.textContent = texto;
+      intro.hidden = false;
+    } else {
+      intro.hidden = true;
+    }
   }
 
   pintarRejilla();
