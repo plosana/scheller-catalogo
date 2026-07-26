@@ -1,0 +1,11 @@
+Pon aquí las fotos de los cuadros.
+
+Recomendaciones:
+- Nombres de archivo sin espacios ni acentos: secante-014.jpg, serigrafia-003.jpg
+- Formato JPG o PNG, tamaño razonable (no hace falta más de 1500-2000 px de lado
+  largo; fotos de 20-30 MB directas de una cámara moderna harán que la web
+  cargue muy lenta — puedes reducirlas con cualquier editor o con una web
+  como squoosh.app antes de subirlas).
+- Cada foto se referencia luego en js/data.js con la ruta "images/nombre.jpg"
+
+Este archivo LEEME.txt lo puedes borrar cuando ya no lo necesites.

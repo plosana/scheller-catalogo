@@ -1,0 +1,232 @@
+/* ==========================================================================
+   LÓGICA DEL CATÁLOGO
+   No hace falta tocar este archivo para añadir cuadros: eso se hace en
+   data.js. Este archivo solo pinta lo que hay en data.js en la pantalla.
+   ========================================================================== */
+
+const NOMBRES_CATEGORIA = {
+  oleo: "Óleo",
+  serigrafia: "Serigrafía",
+  secante: "Secante",
+  teatro: "Teatro de muñecos",
+  pantocrator: "Pantocrátor"
+};
+
+const estado = {
+  categoria: "todas",
+  busqueda: "",
+  orden: "destacadas"
+};
+
+const rejilla = document.getElementById("rejilla");
+const contador = document.getElementById("contador");
+
+/* ---------- utilidades ---------- */
+
+function areaDeMedidas(medidas) {
+  if (!medidas) return 0;
+  const numeros = medidas.match(/\d+([.,]\d+)?/g);
+  if (!numeros || numeros.length < 2) return 0;
+  const a = parseFloat(numeros[0].replace(",", "."));
+  const b = parseFloat(numeros[1].replace(",", "."));
+  return a * b;
+}
+
+function normaliza(texto) {
+  return (texto || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+/* ---------- filtrar + ordenar ---------- */
+
+function obrasVisibles() {
+  let lista = OBRAS.filter((o) => {
+    const coincideCategoria = estado.categoria === "todas" || o.categoria === estado.categoria;
+    const coincideBusqueda = normaliza(o.titulo).includes(normaliza(estado.busqueda));
+    return coincideCategoria && coincideBusqueda;
+  });
+
+  switch (estado.orden) {
+    case "titulo-az":
+      lista.sort((a, b) => a.titulo.localeCompare(b.titulo, "es"));
+      break;
+    case "titulo-za":
+      lista.sort((a, b) => b.titulo.localeCompare(a.titulo, "es"));
+      break;
+    case "tamano-mayor":
+      lista.sort((a, b) => areaDeMedidas(b.medidas) - areaDeMedidas(a.medidas));
+      break;
+    case "tamano-menor":
+      lista.sort((a, b) => areaDeMedidas(a.medidas) - areaDeMedidas(b.medidas));
+      break;
+    case "disponibilidad":
+      lista.sort((a, b) => (b.disponible === true) - (a.disponible === true));
+      break;
+    case "destacadas":
+    default:
+      lista.sort((a, b) => (b.destacada === true) - (a.destacada === true));
+      break;
+  }
+  return lista;
+}
+
+/* ---------- pintar la rejilla ---------- */
+
+function pintarRejilla() {
+  const lista = obrasVisibles();
+  rejilla.innerHTML = "";
+
+  contador.textContent = `${lista.length} pieza${lista.length === 1 ? "" : "s"}`;
+
+  if (lista.length === 0) {
+    const vacio = document.createElement("div");
+    vacio.className = "rejilla-vacia";
+    vacio.textContent = "No hay ninguna obra que coincida con esta búsqueda.";
+    rejilla.appendChild(vacio);
+    return;
+  }
+
+  lista.forEach((obra) => {
+    const tarjeta = document.createElement("button");
+    tarjeta.className = "obra";
+    tarjeta.type = "button";
+    tarjeta.setAttribute("aria-label", `Ver ficha de ${obra.titulo}`);
+
+    const meta = [NOMBRES_CATEGORIA[obra.categoria] || obra.categoria, obra.medidas]
+      .filter(Boolean)
+      .join(" · ");
+
+    tarjeta.innerHTML = `
+      <div class="obra-marco">
+        <span class="etiqueta-inventario">Nº ${obra.id}</span>
+        ${obra.disponible === false ? '<span class="etiqueta-vendido">Vendido</span>' : ""}
+        <img src="${obra.imagen}" alt="${obra.titulo}" loading="lazy"
+             onerror="this.parentElement.classList.add('sin-imagen'); this.remove(); this.parentElement.insertAdjacentHTML('beforeend', '<span>Foto pendiente<br>de subir</span>')">
+      </div>
+      <div class="obra-info">
+        <p class="obra-titulo">${obra.titulo}</p>
+        <p class="obra-meta">${meta}</p>
+        ${obra.disponible !== false && obra.precio ? `<p class="obra-precio">${obra.precio}</p>` : ""}
+      </div>
+    `;
+
+    tarjeta.addEventListener("click", () => abrirFicha(obra));
+    rejilla.appendChild(tarjeta);
+  });
+}
+
+/* ---------- ficha ampliada ---------- */
+
+const fichaFondo = document.getElementById("fichaFondo");
+
+function enlaceEmail(obra) {
+  const asunto = encodeURIComponent(`Consulta sobre "${obra.titulo}" (${obra.id})`);
+  const cuerpo = encodeURIComponent(
+    `Hola,\n\nMe interesa la obra "${obra.titulo}" (referencia ${obra.id}). ¿Podríais darme más información?\n\nGracias.`
+  );
+  return `mailto:${CONTACTO.email}?subject=${asunto}&body=${cuerpo}`;
+}
+
+function enlaceWhatsapp(obra) {
+  const texto = encodeURIComponent(
+    `Hola, me interesa la obra "${obra.titulo}" (referencia ${obra.id}) del catálogo de Callein Scheller.`
+  );
+  return `https://wa.me/${CONTACTO.whatsapp}?text=${texto}`;
+}
+
+function abrirFicha(obra) {
+  document.getElementById("fichaId").textContent = `Nº de inventario ${obra.id}`;
+  document.getElementById("fichaTitulo").textContent = obra.titulo;
+
+  const imagenCont = document.getElementById("fichaImagen");
+  imagenCont.innerHTML = `<img src="${obra.imagen}" alt="${obra.titulo}">`;
+
+  const filas = [
+    ["Técnica", obra.tecnica],
+    ["Medidas", obra.medidas],
+    ["Año", obra.anio],
+    ["Categoría", NOMBRES_CATEGORIA[obra.categoria] || obra.categoria],
+    ["Disponibilidad", obra.disponible === false ? "Vendido" : "Disponible"]
+  ].filter(([, valor]) => valor);
+
+  document.getElementById("fichaTabla").innerHTML = filas
+    .map(([etiqueta, valor]) => `<div><span>${etiqueta}</span><span>${valor}</span></div>`)
+    .join("");
+
+  document.getElementById("fichaNotas").textContent = obra.notas || "";
+  document.getElementById("fichaPrecio").textContent =
+    obra.disponible !== false && obra.precio ? obra.precio : "";
+
+  const acciones = document.getElementById("fichaAcciones");
+  if (obra.disponible === false) {
+    acciones.innerHTML = "";
+  } else {
+    acciones.innerHTML = `
+      <a class="boton boton-relleno" href="${enlaceEmail(obra)}">Consultar por email</a>
+      <a class="boton boton-contorno" href="${enlaceWhatsapp(obra)}" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    `;
+  }
+
+  fichaFondo.classList.add("abierta");
+  document.body.style.overflow = "hidden";
+}
+
+function cerrarFicha() {
+  fichaFondo.classList.remove("abierta");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("fichaCerrar").addEventListener("click", cerrarFicha);
+fichaFondo.addEventListener("click", (e) => {
+  if (e.target === fichaFondo) cerrarFicha();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") cerrarFicha();
+});
+
+/* ---------- controles: buscador, chips, orden, nav ---------- */
+
+document.getElementById("buscar").addEventListener("input", (e) => {
+  estado.busqueda = e.target.value;
+  pintarRejilla();
+});
+
+document.getElementById("orden").addEventListener("change", (e) => {
+  estado.orden = e.target.value;
+  pintarRejilla();
+});
+
+function seleccionarCategoria(categoria) {
+  estado.categoria = categoria;
+  document.querySelectorAll(".chip").forEach((chip) => {
+    chip.setAttribute("aria-pressed", String(chip.dataset.cat === categoria));
+  });
+  pintarRejilla();
+}
+
+document.getElementById("categorias").addEventListener("click", (e) => {
+  const chip = e.target.closest(".chip");
+  if (!chip) return;
+  seleccionarCategoria(chip.dataset.cat);
+});
+
+document.querySelectorAll("[data-cat-nav]").forEach((enlace) => {
+  enlace.addEventListener("click", (e) => {
+    e.preventDefault();
+    seleccionarCategoria(enlace.dataset.catNav);
+    document.getElementById("catalogo").scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+/* ---------- contacto general (pie de página) ---------- */
+
+document.getElementById("pieEmail").href =
+  `mailto:${CONTACTO.email}?subject=${encodeURIComponent("Consulta sobre el archivo de Callein Scheller")}`;
+document.getElementById("pieWhatsapp").href =
+  `https://wa.me/${CONTACTO.whatsapp}?text=${encodeURIComponent("Hola, escribo por el catálogo de Callein Scheller.")}`;
+
+/* ---------- primera pintura ---------- */
+
+pintarRejilla();
