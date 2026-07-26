@@ -634,9 +634,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .acerca-cabecera {
-  max-width: 640px;
-  margin: 0 auto clamp(48px, 7vw, 68px);
-  text-align: center;
+  max-width: 620px;
+  margin: 0 0 clamp(44px, 6vw, 60px);
+  text-align: left;
 }
 
 .acerca-eyebrow {
@@ -645,14 +645,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--verdigris-dark);
-  margin: 0 0 16px;
+  margin: 0 0 14px;
 }
 
 .acerca-bio {
   font-family: var(--display);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  font-size: clamp(1.05rem, 1.6vw, 1.15rem);
   line-height: 1.55;
   color: var(--ink);
   margin: 0;
@@ -660,11 +660,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .acerca-reflexion {
   max-width: 52ch;
-  margin: 24px auto 0;
-  padding-top: 20px;
+  margin: 20px 0 0;
+  padding-top: 18px;
   border-top: 1px solid var(--linea);
-  font-size: 0.9rem;
-  line-height: 1.65;
+  font-size: 0.88rem;
+  line-height: 1.6;
   color: var(--carbon);
 }
 
