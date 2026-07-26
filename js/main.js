@@ -207,6 +207,28 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") cerrarFicha();
 });
 
+/* ---------- vistas: catálogo / acerca / contacto ---------- */
+
+const vistas = {
+  catalogo: document.getElementById("catalogo"),
+  acerca: document.getElementById("acerca"),
+  contacto: document.getElementById("contacto")
+};
+
+function mostrarVista(nombre) {
+  Object.entries(vistas).forEach(([clave, el]) => {
+    if (el) el.hidden = clave !== nombre;
+  });
+}
+
+document.querySelectorAll("[data-vista-nav]").forEach((enlace) => {
+  enlace.addEventListener("click", (e) => {
+    e.preventDefault();
+    mostrarVista(enlace.dataset.vistaNav);
+    vistas[enlace.dataset.vistaNav].scrollIntoView({ behavior: "smooth" });
+  });
+});
+
 /* ---------- controles: buscador, chips, orden, nav ---------- */
 
 document.getElementById("buscar").addEventListener("input", (e) => {
@@ -248,8 +270,9 @@ document.getElementById("categorias").addEventListener("click", (e) => {
 document.querySelectorAll("[data-cat-nav]").forEach((enlace) => {
   enlace.addEventListener("click", (e) => {
     e.preventDefault();
+    mostrarVista("catalogo");
     seleccionarCategoria(enlace.dataset.catNav);
-    document.getElementById("catalogo").scrollIntoView({ behavior: "smooth" });
+    vistas.catalogo.scrollIntoView({ behavior: "smooth" });
   });
 });
 
