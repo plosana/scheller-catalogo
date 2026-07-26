@@ -331,18 +331,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
    REJILLA DE OBRAS
    ========================================================================== */
 .rejilla {
-  --espacio-rejilla: clamp(28px, 3vw, 40px);
-  column-width: 250px;
-  column-gap: var(--espacio-rejilla);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  align-items: center;
+  gap: clamp(28px, 3vw, 40px);
   padding: 32px 0 80px;
 }
 
 .obra {
-  display: block;
-  width: 100%;
-  margin: 0 0 var(--espacio-rejilla);
-  break-inside: avoid;
-  -webkit-column-break-inside: avoid;
   position: relative;
   background: transparent;
   border: none;
@@ -460,7 +456,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .rejilla-vacia {
-  column-span: all;
+  grid-column: 1 / -1;
   padding: 60px 20px;
   text-align: center;
   font-family: var(--mono);
