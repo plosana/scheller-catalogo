@@ -213,6 +213,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   padding: clamp(40px, 6vw, 64px) 0 12px;
 }
 
+.barra-herramientas {
+  margin: clamp(40px, 6vw, 64px) 0 0;
+}
+
 .taller-titulo {
   display: flex;
   align-items: baseline;

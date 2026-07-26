@@ -234,16 +234,19 @@ document.querySelectorAll("[data-vista-nav]").forEach((enlace) => {
 /* ---------- controles: buscador, chips, orden, nav ---------- */
 
 document.getElementById("buscar").addEventListener("input", (e) => {
+  mostrarVista("catalogo");
   estado.busqueda = e.target.value;
   pintarRejilla();
 });
 
 document.getElementById("orden").addEventListener("change", (e) => {
+  mostrarVista("catalogo");
   estado.orden = e.target.value;
   pintarRejilla();
 });
 
 function seleccionarCategoria(categoria) {
+  mostrarVista("catalogo");
   estado.categoria = categoria;
   document.querySelectorAll(".chip").forEach((chip) => {
     chip.setAttribute("aria-pressed", String(chip.dataset.cat === categoria));
@@ -272,7 +275,6 @@ document.getElementById("categorias").addEventListener("click", (e) => {
 document.querySelectorAll("[data-cat-nav]").forEach((enlace) => {
   enlace.addEventListener("click", (e) => {
     e.preventDefault();
-    mostrarVista("catalogo");
     seleccionarCategoria(enlace.dataset.catNav);
     vistas.catalogo.scrollIntoView({ behavior: "smooth" });
   });
