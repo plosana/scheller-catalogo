@@ -46,4 +46,86 @@
     </div>
     <div class="hero-lateral">
       <p><strong>Sobre este catálogo.</strong> Cada obra tiene su propia ficha de inventario, con medidas, técnica y disponibilidad.</p>
-      <p>¿Interesa alguna pieza o
+      <p>¿Interesa alguna pieza o quieres más fotos y detalle? Escribe directamente por email o WhatsApp desde su ficha.</p>
+    </div>
+  </div>
+</header>
+
+<main class="taller envolvente" id="catalogo">
+  <div class="taller-titulo">
+    <h2>Catálogo</h2>
+    <span class="taller-contador" id="contador"></span>
+  </div>
+
+  <div class="herramientas">
+    <div class="buscador">
+      <label for="buscar" class="visually-hidden">Buscar por título</label>
+      <input type="search" id="buscar" placeholder="Buscar por título…" autocomplete="off">
+    </div>
+    <div class="categorias" id="categorias" role="group" aria-label="Filtrar por categoría">
+      <button class="chip" data-cat="todas" aria-pressed="true">Todas</button>
+      <button class="chip" data-cat="oleo" aria-pressed="false">Óleos</button>
+      <button class="chip" data-cat="serigrafia" aria-pressed="false">Serigrafías</button>
+      <button class="chip" data-cat="secante" aria-pressed="false">Secantes</button>
+      <button class="chip" data-cat="pantocrator" aria-pressed="false">Pantocrátor</button>
+    </div>
+    <div class="orden">
+      <label for="orden">Ordenar</label>
+      <select id="orden">
+        <option value="destacadas">Destacadas primero</option>
+        <option value="inventario">Nº de inventario</option>
+        <option value="titulo-az">Título (A–Z)</option>
+        <option value="titulo-za">Título (Z–A)</option>
+        <option value="tamano-mayor">Tamaño (mayor primero)</option>
+        <option value="tamano-menor">Tamaño (menor primero)</option>
+        <option value="disponibilidad">Disponibles primero</option>
+      </select>
+    </div>
+  </div>
+
+  <p class="categoria-intro" id="categoriaIntro" hidden></p>
+
+  <div class="rejilla" id="rejilla"></div>
+</main>
+
+<div class="ficha-fondo" id="fichaFondo">
+  <div class="ficha" role="dialog" aria-modal="true" aria-labelledby="fichaTitulo">
+    <button class="ficha-cerrar" id="fichaCerrar" aria-label="Cerrar ficha">✕</button>
+    <div class="ficha-imagen" id="fichaImagen"></div>
+    <div class="ficha-datos">
+      <p class="ficha-id" id="fichaId"></p>
+      <h3 id="fichaTitulo"></h3>
+      <div class="ficha-tabla" id="fichaTabla"></div>
+      <p class="ficha-notas" id="fichaNotas"></p>
+      <div class="ficha-historia" id="fichaHistoria" hidden></div>
+      <p class="ficha-precio" id="fichaPrecio"></p>
+      <div class="ficha-acciones" id="fichaAcciones"></div>
+    </div>
+  </div>
+</div>
+
+<section class="acerca" id="acerca">
+  <div class="envolvente acerca-cabecera">
+    <p class="acerca-eyebrow">Acerca del artista</p>
+    <p class="acerca-bio" id="acercaBio"></p>
+    <p class="acerca-reflexion" id="acercaReflexion"></p>
+  </div>
+  <div class="acerca-galeria" id="acercaGaleria"></div>
+</section>
+
+<footer class="pie envolvente" id="contacto">
+  <div class="pie-interior">
+    <p class="pie-firma">Scheller</p>
+    <div class="pie-contacto">
+      <span>¿Preguntas sobre alguna obra o sobre el conjunto del archivo?</span>
+      <a id="pieEmail" href="#">Escribir por email</a>
+      <a id="pieWhatsapp" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </div>
+  </div>
+  <p class="pie-nota">Archivo familiar de Callein Scheller. Todas las imágenes pertenecen a la familia y se muestran con fines de catalogación y venta.</p>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
