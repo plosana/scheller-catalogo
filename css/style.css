@@ -242,12 +242,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   border-radius: var(--radio);
 }
 
-@media (max-width: 640px) {
-  .categoria-intro {
-    max-width: 100%;
-  }
-}
-
 .taller-contador {
   font-family: var(--mono);
   font-size: 0.78rem;
@@ -628,6 +622,107 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 720px) {
   .ficha { grid-template-columns: 1fr; }
   .ficha-imagen { min-height: 220px; }
+}
+
+/* ==========================================================================
+   ACERCA DEL ARTISTA
+   ========================================================================== */
+.acerca {
+  padding: clamp(64px, 9vw, 100px) 0 clamp(56px, 8vw, 80px);
+  border-top: 1px solid var(--linea);
+  background: var(--lienzo-soft);
+}
+
+.acerca-cabecera {
+  max-width: 640px;
+  margin: 0 auto clamp(48px, 7vw, 68px);
+  text-align: center;
+}
+
+.acerca-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--verdigris-dark);
+  margin: 0 0 16px;
+}
+
+.acerca-bio {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+}
+
+.acerca-reflexion {
+  max-width: 52ch;
+  margin: 24px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--linea);
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--carbon);
+}
+
+.acerca-galeria {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 56px);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 40px 28px;
+}
+
+.acerca-marco {
+  position: relative;
+  overflow: hidden;
+  background: #d9c88f;
+  aspect-ratio: 4 / 5;
+  margin-bottom: 14px;
+}
+
+.acerca-marco img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.97);
+}
+
+.acerca-marco.sin-imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--carbon);
+  text-align: center;
+  padding: 16px;
+}
+
+.acerca-item-titulo {
+  font-family: var(--display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+
+.acerca-item-meta {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--verdigris-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.acerca-item-nota {
+  font-size: 0.85rem;
+  color: var(--carbon);
+  line-height: 1.5;
+  margin: 6px 0 0;
 }
 
 /* ==========================================================================

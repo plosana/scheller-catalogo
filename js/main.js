@@ -8,7 +8,6 @@ const NOMBRES_CATEGORIA = {
   oleo: "Óleo",
   serigrafia: "Serigrafía",
   secante: "Secante",
-  teatro: "Teatro de muñecos",
   pantocrator: "Pantocrátor"
 };
 
@@ -49,6 +48,9 @@ function obrasVisibles() {
   });
 
   switch (estado.orden) {
+    case "inventario":
+      lista.sort((a, b) => a.id.localeCompare(b.id, "es", { numeric: true }));
+      break;
     case "titulo-az":
       lista.sort((a, b) => a.titulo.localeCompare(b.titulo, "es"));
       break;
@@ -65,13 +67,9 @@ function obrasVisibles() {
       lista.sort((a, b) => (b.disponible === true) - (a.disponible === true));
       break;
     case "destacadas":
+    default:
       lista.sort((a, b) => (b.destacada === true) - (a.destacada === true));
       break;
-    case "inventario":
-      default:
-      lista.sort((a, b) => a.id.localeCompare(b.id, "es", { numeric: true }));
-      break;
-      
   }
   return lista;
 }
@@ -262,6 +260,42 @@ document.getElementById("pieEmail").href =
 document.getElementById("pieWhatsapp").href =
   `https://wa.me/${CONTACTO.whatsapp}?text=${encodeURIComponent("Hola, escribo por el catálogo de Callein Scheller.")}`;
 
+/* ---------- sección "Acerca del artista" ---------- */
+
+function pintarAcerca() {
+  const bio = document.getElementById("acercaBio");
+  const galeria = document.getElementById("acercaGaleria");
+  if (!bio || !galeria || typeof ACERCA === "undefined") return;
+
+  bio.textContent = ACERCA.bio || "";
+
+  const reflexion = document.getElementById("acercaReflexion");
+  if (reflexion) reflexion.textContent = ACERCA.reflexion || "";
+
+  galeria.innerHTML = "";
+
+  ACERCA.galeria.forEach((item) => {
+    const figura = document.createElement("figure");
+    figura.style.margin = "0";
+
+    const meta = [item.anio].filter(Boolean).join(" · ");
+
+    figura.innerHTML = `
+      <div class="acerca-marco">
+        <img src="${item.imagen}" alt="${item.titulo}" loading="lazy"
+             onerror="manejarImagenFaltante(this)">
+      </div>
+      <figcaption>
+        <p class="acerca-item-titulo">${item.titulo}</p>
+        ${meta ? `<p class="acerca-item-meta">${meta}</p>` : ""}
+        ${item.nota ? `<p class="acerca-item-nota">${item.nota}</p>` : ""}
+      </figcaption>
+    `;
+    galeria.appendChild(figura);
+  });
+}
+
 /* ---------- primera pintura ---------- */
 
 pintarRejilla();
+pintarAcerca();

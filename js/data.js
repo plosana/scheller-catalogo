@@ -59,14 +59,97 @@ const CONTACTO = {
   dejas vacío no se muestra nada.
 */
 const CATEGORIA_INTRO = {
+  oleo:
+    "La obra de Callein Scheller es fuerte, robusta y espontánea, gracias a pinceladas anchas y rápidas. Su impresionismo expresivo revela un temperamento insumiso, poco dado al formulismo de la época (años 40). Con una paleta de pocos colores, captó con destreza paisajes costeros y de montaña, rincones de ciudad dinámicos, y retratos preocupados por resolver problemas anatómicos y psicológicos. Fue un artista apasionado y vivaz que dejó parte de su alma en cada lienzo.",
   serigrafia:
     "La serigrafía es una técnica de impresión milenaria, originaria de la antigua China, que llega a Occidente a través de la seda tensada en un marco (de ahí su nombre: sericum, seda, y graphe, escribir). Scheller alcanzó gran maestría en esta técnica laboriosa, aplicada aquí a paisajes rurales y urbanos con un lenguaje expresionista de color y trazo.",
   secante:
     "El papel secante fue un objeto cotidiano en oficinas y escuelas de los años 50 y 60, usado para absorber el exceso de tinta de las plumillas. Empresas como Pelikan los regalaban ilustrados por una cara, dirigidos al público infantil. Scheller fue uno de los ilustradores de estos secantes, con escenas de cuentos clásicos y enanitos del bosque en formato de 9 x 13 cm. Hoy son piezas muy buscadas por coleccionistas.",
-  teatro:
-    "El 23 de noviembre de 1947 se estrenó en la Cúpula del Coliseum de Barcelona \"La casita encantada\", un espectáculo infantil de muñecos y decorados creados por Scheller, con cuentos de los hermanos Grimm adaptados por Mª A. Sardá. Estos muñecos son los que quedaron de aquella función.",
   pantocrator:
     "Copia serigráfica de una de las pinturas murales románicas más conocidas: el Pantocrátor del ábside de Sant Climent de Taüll (alta Edad Media, s. XII). Fue la primera vez que se lograba un resultado semejante en serigrafía."
+};
+
+/*
+  Contenido de la sección "Acerca del artista": biografía y piezas que no
+  están a la venta (muñecos de teatro, prensa, fotos de época) pero que
+  forman parte de su historia y merecen conservarse igualmente.
+*/
+const ACERCA = {
+  bio:
+    "Callein Scheller pintó entre los años 40 y 50 con un impresionismo expresivo y una paleta corta: paisajes costeros y de montaña, rincones de ciudad, retratos. Pero su obra no se quedó en el lienzo — también diseñó muñecos y decorados de teatro, ilustró papel secante infantil para Pelikan, y en 1961 realizó una serigrafía del Pantocrátor de Taüll reseñada en la prensa de la época. Esta sección reúne lo que ya no está a la venta, pero que forma parte de su historia.",
+  reflexion:
+    "Hay fotos que son un acierto y otras que no lo son. Son memoria de situaciones pasadas, y también obras incompletas que los años se encargan de terminar: algunas se llenan de sombras que las apagan y pierden su sentido; otras sobreviven, y su significado se confirma con el paso del tiempo.",
+  galeria: [
+    {
+      titulo: "Desdoble",
+      imagen: "images/historico-desdoble.jpg",
+      anio: "",
+      nota: "Doble exposición fotográfica."
+    },
+    {
+      titulo: "Carrer de Balears",
+      imagen: "images/historico-carrer-de-balears.jpg",
+      anio: "",
+      nota: ""
+    },
+    {
+      titulo: "Foto Univex",
+      imagen: "images/historico-foto-univex-1.jpg",
+      anio: "",
+      nota: ""
+    },
+    {
+      titulo: "Foto Univex",
+      imagen: "images/historico-foto-univex-2.jpg",
+      anio: "",
+      nota: ""
+    },
+    {
+      titulo: "Estreno de \"La casita encantada\"",
+      imagen: "images/historico-casita-encantada.jpg",
+      anio: "1947",
+      nota: "23 de noviembre de 1947, Cúpula del Coliseum de Barcelona: espectáculo infantil de muñecos y decorados de Scheller, con cuentos de los hermanos Grimm adaptados por Mª A. Sardá."
+    },
+    { titulo: "Muñecos de \"La casita encantada\"", imagen: "images/historico-teatro-grupo-1.jpg", anio: "1947", nota: "" },
+    { titulo: "Muñecos de \"La casita encantada\"", imagen: "images/historico-teatro-grupo-2.jpg", anio: "1947", nota: "" },
+    { titulo: "Caperucita Roja", imagen: "images/historico-teatro-caperucita.jpg", anio: "1947", nota: "" },
+    { titulo: "Gato con botas y Genio", imagen: "images/historico-teatro-gato-botas-genio.jpg", anio: "1947", nota: "" },
+    { titulo: "Enano, rey y bruja", imagen: "images/historico-teatro-enano-rey-bruja.jpg", anio: "1947", nota: "" },
+    { titulo: "Princesas y ogro", imagen: "images/historico-teatro-princesas-ogro.jpg", anio: "1947", nota: "" },
+    { titulo: "Chino y cazador", imagen: "images/historico-teatro-chino-cazador.jpg", anio: "1947", nota: "" },
+    { titulo: "Niños y enanos", imagen: "images/historico-teatro-ninos-enanos.jpg", anio: "1947", nota: "" },
+    { titulo: "Niñas, brujos y enanos", imagen: "images/historico-teatro-ninas-brujos-enanos.jpg", anio: "1947", nota: "" },
+    {
+      titulo: "Año artístico 40-41",
+      imagen: "images/historico-ano-artistico-40-41.jpg",
+      anio: "1940-41",
+      nota: "Primera impresión pictórica de Scheller."
+    },
+    {
+      titulo: "Año artístico 41-42",
+      imagen: "images/historico-ano-artistico-41-42.jpg",
+      anio: "1941-42",
+      nota: ""
+    },
+    {
+      titulo: "Año artístico 42-43",
+      imagen: "images/historico-ano-artistico-42-43.jpg",
+      anio: "1942-43",
+      nota: ""
+    },
+    {
+      titulo: "Scheller en la biblioteca alemana",
+      imagen: "images/historico-biblioteca-alemana.jpg",
+      anio: "1957",
+      nota: "La Vanguardia, 20 de diciembre de 1957."
+    },
+    {
+      titulo: "Crítica en Destino",
+      imagen: "images/historico-critica-destino.jpg",
+      anio: "1958",
+      nota: "Revista Destino, 4 de enero de 1958."
+    }
+  ]
 };
 
 const OBRAS = [
@@ -515,9 +598,9 @@ const OBRAS = [
 
   /* ======================= SECANTES ======================= */
   {
-    id: "SC-001", categoria: "secante", titulo: "Los enanitos con la tinta",
+    id: "SC-001", categoria: "secante", titulo: "Blancanieves",
     tecnica: "Secante ilustrado (edición Pelikan)", medidas: "9 x 13 cm", anio: "h. 1950-60",
-    imagen: "images/secante-enanos-tinta.jpg",
+    imagen: "images/secante-blancanieves.jpg",
     disponible: true, precio: "Consultar", destacada: true,
     notas: "Ilustración infantil.", historia: ""
   },
@@ -555,63 +638,6 @@ const OBRAS = [
     id: "SC-007", categoria: "secante", titulo: "Los enanitos bajo el árbol",
     tecnica: "Secante ilustrado (edición Pelikan)", medidas: "9 x 13 cm", anio: "h. 1950-60",
     imagen: "images/secante-enanos-arbol.jpg",
-    disponible: true, precio: "Consultar", destacada: false, notas: "", historia: ""
-  },
-
-  /* ======================= TEATRO DE MUÑECOS ======================= */
-  {
-    id: "TM-001", categoria: "teatro", titulo: "Muñecos de \"La casita encantada\" (grupo)",
-    tecnica: "Muñeco y decorado de teatro, técnica mixta", medidas: "", anio: "1947",
-    imagen: "images/teatro-munecos-grupo-1.jpg",
-    disponible: true, precio: "Consultar", destacada: true,
-    notas: "Figuras del elenco de la función estrenada en el Coliseum de Barcelona.", historia: ""
-  },
-  {
-    id: "TM-002", categoria: "teatro", titulo: "Muñecos de \"La casita encantada\" (grupo)",
-    tecnica: "Muñeco y decorado de teatro, técnica mixta", medidas: "", anio: "1947",
-    imagen: "images/teatro-munecos-grupo-2.jpg",
-    disponible: true, precio: "Consultar", destacada: false, notas: "", historia: ""
-  },
-  {
-    id: "TM-003", categoria: "teatro", titulo: "Caperucita Roja",
-    tecnica: "Muñeco de teatro, técnica mixta", medidas: "", anio: "1947",
-    imagen: "images/teatro-caperucita.jpg",
-    disponible: true, precio: "Consultar", destacada: false, notas: "", historia: ""
-  },
-  {
-    id: "TM-004", categoria: "teatro", titulo: "Gato con botas y Genio",
-    tecnica: "Muñeco de teatro, técnica mixta", medidas: "", anio: "1947",
-    imagen: "images/teatro-gato-con-botas-genio.jpg",
-    disponible: true, precio: "Consultar", destacada: false, notas: "", historia: ""
-  },
-  {
-    id: "TM-005", categoria: "teatro", titulo: "Enano, rey y bruja",
-    tecnica: "Muñeco de teatro, técnica mixta", medidas: "", anio: "1947",
-    imagen: "images/teatro-enano-rey-bruja.jpg",
-    disponible: true, precio: "Consultar", destacada: false, notas: "", historia: ""
-  },
-  {
-    id: "TM-006", categoria: "teatro", titulo: "Princesas y ogro",
-    tecnica: "Muñeco de teatro, técnica mixta", medidas: "", anio: "1947",
-    imagen: "images/teatro-princesas-ogro.jpg",
-    disponible: true, precio: "Consultar", destacada: false, notas: "", historia: ""
-  },
-  {
-    id: "TM-007", categoria: "teatro", titulo: "Chino y cazador",
-    tecnica: "Muñeco de teatro, técnica mixta", medidas: "", anio: "1947",
-    imagen: "images/teatro-chino-cazador.jpg",
-    disponible: true, precio: "Consultar", destacada: false, notas: "", historia: ""
-  },
-  {
-    id: "TM-008", categoria: "teatro", titulo: "Niños y enanos",
-    tecnica: "Muñeco de teatro, técnica mixta", medidas: "", anio: "1947",
-    imagen: "images/teatro-ninos-enanos.jpg",
-    disponible: true, precio: "Consultar", destacada: false, notas: "", historia: ""
-  },
-  {
-    id: "TM-009", categoria: "teatro", titulo: "Niñas, brujos y enanos",
-    tecnica: "Muñeco de teatro, técnica mixta", medidas: "", anio: "1947",
-    imagen: "images/teatro-ninas-brujos-enanos.jpg",
     disponible: true, precio: "Consultar", destacada: false, notas: "", historia: ""
   },
 
