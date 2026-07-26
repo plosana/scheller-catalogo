@@ -333,6 +333,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .rejilla {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  align-items: start;
   gap: clamp(28px, 3vw, 40px);
   padding: 32px 0 80px;
 }
@@ -352,7 +353,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   position: relative;
   overflow: hidden;
   background: #fff;
-  aspect-ratio: 4 / 5;
+  padding: 10px;
   box-shadow: var(--sombra);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -364,12 +365,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 
 .obra-marco img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  box-sizing: border-box;
-  padding: 10px;
-  background: #fff;
+  height: auto;
   filter: saturate(0.97);
 }
 
@@ -382,6 +380,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   color: var(--carbon);
   text-align: center;
   padding: 20px;
+  min-height: 240px;
   letter-spacing: 0.04em;
 }
 
@@ -633,7 +632,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .acerca {
   padding: clamp(64px, 9vw, 100px) 0 clamp(56px, 8vw, 80px);
   border-top: 1px solid var(--linea);
-  background: var(--lienzo-soft);
 }
 
 .acerca-cabecera {
@@ -658,7 +656,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   line-height: 1.6;
   margin: 0;
   padding: 18px 22px;
-  background: #fff;
+  background: var(--lienzo-soft);
   border: 1px solid var(--linea);
   border-left: 3px solid var(--verdigris);
   border-radius: var(--radio);
@@ -680,6 +678,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   padding: 0 clamp(20px, 5vw, 56px);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  align-items: start;
   gap: 40px 28px;
 }
 
@@ -687,17 +686,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   position: relative;
   overflow: hidden;
   background: #fff;
-  aspect-ratio: 4 / 5;
+  padding: 10px;
   margin-bottom: 14px;
 }
 
 .acerca-marco img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  box-sizing: border-box;
-  padding: 10px;
-  background: #fff;
+  height: auto;
   filter: saturate(0.97);
 }
 
@@ -710,6 +706,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   color: var(--carbon);
   text-align: center;
   padding: 16px;
+  min-height: 220px;
 }
 
 .acerca-item-titulo {

@@ -157,9 +157,12 @@ function abrirFicha(obra) {
     ["Técnica", obra.tecnica],
     ["Medidas", obra.medidas],
     ["Año", obra.anio],
-    ["Categoría", NOMBRES_CATEGORIA[obra.categoria] || obra.categoria],
-    ["Disponibilidad", obra.disponible === false ? "Vendido" : "Disponible"]
+    ["Categoría", NOMBRES_CATEGORIA[obra.categoria] || obra.categoria]
   ].filter(([, valor]) => valor);
+
+  if (obra.disponible === false) {
+    filas.push(["Disponibilidad", "Vendido"]);
+  }
 
   document.getElementById("fichaTabla").innerHTML = filas
     .map(([etiqueta, valor]) => `<div><span>${etiqueta}</span><span>${valor}</span></div>`)
@@ -207,12 +210,11 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") cerrarFicha();
 });
 
-/* ---------- vistas: catálogo / acerca / contacto ---------- */
+/* ---------- vistas: catálogo / acerca ---------- */
 
 const vistas = {
   catalogo: document.getElementById("catalogo"),
-  acerca: document.getElementById("acerca"),
-  contacto: document.getElementById("contacto")
+  acerca: document.getElementById("acerca")
 };
 
 function mostrarVista(nombre) {
