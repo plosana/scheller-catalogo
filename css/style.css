@@ -431,6 +431,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .obra-info {
   padding: 14px 2px 0;
+  text-align: center;
 }
 
 .obra-titulo {
