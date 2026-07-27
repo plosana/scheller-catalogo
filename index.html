@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Callein Scheller — Catálogo de obra</title>
 <meta name="description" content="Catálogo de la obra de Callein Scheller: óleos, serigrafías, secantes y teatro de muñecos. Archivo familiar disponible para su venta.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://plosana.github.io/scheller-catalogo/">
+<meta property="og:title" content="Callein Scheller — Catálogo de obra">
+<meta property="og:description" content="Catálogo de la obra de Callein Scheller: óleos, serigrafías, secantes y teatro de muñecos. Archivo familiar disponible para su venta.">
+<meta property="og:image" content="https://plosana.github.io/scheller-catalogo/images/oleo-girasoles.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500;1,600&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -17,8 +23,11 @@
 
 <nav class="nav">
   <div class="nav-interior">
-    <a href="#" class="nav-firma">Scheller</a>
-    <div class="nav-links">
+    <a href="#" class="nav-firma" data-vista-nav="catalogo">Scheller</a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
       <a href="#catalogo" data-vista-nav="catalogo">Catálogo</a>
       <a href="#" data-cat-nav="oleo">Óleos</a>
       <a href="#" data-cat-nav="serigrafia">Serigrafías</a>
@@ -42,11 +51,12 @@
         pintados entre los años 40 y 50. Esta es la obra que quedó guardada
         durante décadas y que ahora sale, pieza a pieza, de la caja.
       </p>
-      <p class="hero-fechas">Óleos · Serigrafías · Secantes · Teatro de muñecos · Pantocrátor</p>
+      <p class="hero-fechas">Óleos · Serigrafías · Secantes · Pantocrátor</p>
     </div>
     <div class="hero-lateral">
       <p><strong>Sobre este catálogo.</strong> Cada obra tiene su propia ficha de inventario, con medidas, técnica y contexto histórico.</p>
       <p>¿Interesa alguna pieza o quieres más fotos y detalle? Escribe directamente por email o WhatsApp desde su ficha.</p>
+      <div class="hero-detalle" aria-hidden="true"></div>
     </div>
   </div>
 </header>
@@ -108,7 +118,7 @@
 
 <section class="acerca" id="acerca" hidden>
   <div class="envolvente acerca-cabecera">
-    <p class="acerca-eyebrow">Acerca del artista</p>
+    <h2 class="acerca-titulo">Acerca del artista</h2>
     <p class="acerca-bio" id="acercaBio"></p>
     <p class="acerca-reflexion" id="acercaReflexion"></p>
   </div>

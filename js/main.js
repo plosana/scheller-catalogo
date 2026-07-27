@@ -122,7 +122,7 @@ function pintarRejilla() {
       </div>
     `;
 
-    tarjeta.addEventListener("click", () => abrirFicha(obra));
+    tarjeta.addEventListener("click", () => abrirFicha(obra, tarjeta));
     rejilla.appendChild(tarjeta);
   });
 }
@@ -130,6 +130,8 @@ function pintarRejilla() {
 /* ---------- ficha ampliada ---------- */
 
 const fichaFondo = document.getElementById("fichaFondo");
+const fichaCerrarBoton = document.getElementById("fichaCerrar");
+let elementoAnteriorAlFoco = null;
 
 function enlaceEmail(obra) {
   const asunto = encodeURIComponent(`Consulta sobre "${obra.titulo}" (${obra.id})`);
@@ -146,7 +148,8 @@ function enlaceWhatsapp(obra) {
   return `https://wa.me/${CONTACTO.whatsapp}?text=${texto}`;
 }
 
-function abrirFicha(obra) {
+function abrirFicha(obra, disparador) {
+  elementoAnteriorAlFoco = disparador || document.activeElement;
   document.getElementById("fichaId").textContent = `Nº de inventario ${obra.id}`;
   document.getElementById("fichaTitulo").textContent = obra.titulo;
 
@@ -195,11 +198,13 @@ function abrirFicha(obra) {
 
   fichaFondo.classList.add("abierta");
   document.body.style.overflow = "hidden";
+  fichaCerrarBoton.focus();
 }
 
 function cerrarFicha() {
   fichaFondo.classList.remove("abierta");
   document.body.style.overflow = "";
+  if (elementoAnteriorAlFoco) elementoAnteriorAlFoco.focus();
 }
 
 document.getElementById("fichaCerrar").addEventListener("click", cerrarFicha);
@@ -207,7 +212,56 @@ fichaFondo.addEventListener("click", (e) => {
   if (e.target === fichaFondo) cerrarFicha();
 });
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") cerrarFicha();
+  if (!fichaFondo.classList.contains("abierta")) return;
+
+  if (e.key === "Escape") {
+    cerrarFicha();
+    return;
+  }
+
+  if (e.key === "Tab") {
+    const focosables = fichaFondo.querySelectorAll('a[href], button:not([disabled])');
+    if (!focosables.length) return;
+    const primero = focosables[0];
+    const ultimo = focosables[focosables.length - 1];
+    if (e.shiftKey && document.activeElement === primero) {
+      e.preventDefault();
+      ultimo.focus();
+    } else if (!e.shiftKey && document.activeElement === ultimo) {
+      e.preventDefault();
+      primero.focus();
+    }
+  }
+});
+
+/* ---------- menú móvil ---------- */
+
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+
+function cerrarMenu() {
+  navToggle.setAttribute("aria-expanded", "false");
+  navLinks.classList.remove("abierto");
+}
+
+navToggle.addEventListener("click", () => {
+  const abierto = navToggle.getAttribute("aria-expanded") === "true";
+  navToggle.setAttribute("aria-expanded", String(!abierto));
+  navLinks.classList.toggle("abierto", !abierto);
+});
+
+navLinks.querySelectorAll("a").forEach((enlace) => {
+  enlace.addEventListener("click", cerrarMenu);
+});
+
+document.addEventListener("click", (e) => {
+  if (navLinks.classList.contains("abierto") && !e.target.closest(".nav")) {
+    cerrarMenu();
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") cerrarMenu();
 });
 
 /* ---------- vistas: catálogo / acerca ---------- */
@@ -326,3 +380,11 @@ function pintarAcerca() {
 
 pintarRejilla();
 pintarAcerca();
+
+/* Si se entra directamente con un enlace tipo #acerca, mostrar esa
+   vista desde el principio en vez de quedarse en el catálogo. */
+const vistaInicial = vistas[location.hash.slice(1)] ? location.hash.slice(1) : "catalogo";
+if (vistaInicial !== "catalogo") {
+  mostrarVista(vistaInicial);
+  vistas[vistaInicial].scrollIntoView();
+}
